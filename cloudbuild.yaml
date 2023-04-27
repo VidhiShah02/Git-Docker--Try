@@ -1,9 +1,10 @@
 steps:
-- name: python
-  args: ["-m","pip","install","--upgarde","pip"]
-- name: python
-  args: ["-m","pip","install","Flask","pip","--user"]
-- name: "gcr.io/cloud-builders/docker"
-  args: ["build","-t","python-app","."]
-- name: "gcr.io/cloud-builders/docker"
-  args: ["push","python-app"]
+
+- id: "to build the image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["build","-t","gcr.io/vidhi-try/python-flask-app","."]
+
+- id: "to push the image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ["push","gcr.io/vidhi-try/python-flask-app"]
+
