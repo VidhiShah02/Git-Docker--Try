@@ -9,7 +9,7 @@ steps:
   args: ['bash','-c','sed -i "s,image,gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA," $_CONFIGURATION_FILE']
 
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', '$__CONFIGURATION_FILE']
+  args: ['apply','-f', '$__CONFIGURATION_FILE']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster1'
