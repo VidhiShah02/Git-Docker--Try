@@ -1,5 +1,5 @@
 substitutions:
-  _CLOUDSDK_COMPUTE_REGION :  us-central1  # default value
+  _CLOUDSDK_COMPUTE_REGION :  us-central1-c  # default value
   _CLOUDSDK_COMPUTE_ZONE: us-central1-c    # default value
   _CLOUDSDK_CONTAINER_CLUSTER: cluster1   # default value
 steps:
