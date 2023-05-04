@@ -11,7 +11,7 @@ steps:
   args: [
    'build', 
    '-t', 
-   'gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA' ',
+   'gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA' ,
    '.'
   ]
 #step 3
