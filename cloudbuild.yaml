@@ -9,8 +9,8 @@ steps:
 #- name: 'gcr.io/cloud-builders/gcloud'
 #  args: ['config','set','project','${_PROJECT}']
 
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run','deploy','python-service','--image','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA','--region','us-central1','--platform','managed','--memory','8Gi','--cpu','8']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply','-f','python-service','--image','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA','--region','us-central1','--platform','managed','--memory','8Gi','--cpu','8']
 
 images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
 
