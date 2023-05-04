@@ -12,14 +12,14 @@ steps:
 #- name: 'gcr.io/cloud-builders/gcloud'
 #  args: ['config','set','project','${_PROJECT}']
 
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply','-f','python-service','--image','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA','--region','us-central1','--platform','managed','--memory','8Gi','--cpu','8']
-  env:
-  - 'CLOUDSDK_COMPUTE_REGION=${_CLOUDSDK_COMPUTE_REGION}'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
-  - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
+#- name: 'gcr.io/cloud-builders/kubectl'
+ # args: ['apply','-f','python-service','--image','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA','--region','us-central1','--platform','managed','--memory','8Gi','--cpu','8']
+  #env:
+  #- 'CLOUDSDK_COMPUTE_REGION=${_CLOUDSDK_COMPUTE_REGION}'
+  #- 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
+  #- 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
 
-images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
+#images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
 #options:
   #logging: CLOUD_LOGGING_ONLY
 
