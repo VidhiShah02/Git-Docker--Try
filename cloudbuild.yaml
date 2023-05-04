@@ -6,7 +6,7 @@ steps:
   args: ['push','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
 
 - name: 'ubuntu'
-  args: ['bash','-c','sed -i "s,IMAGE_VALUE,gcr.io/$PROJECT_ID/$REPO_NAME/$_PROJECT:$SHORT_SHA," $_CONFIGURATION_FILE']
+  args: ['bash','-c','sed -i "s,IMAGE_VALUE,gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA," $_CONFIGURATION_FILE']
 
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply','-f','$_CONFIGURATION_FILE']
