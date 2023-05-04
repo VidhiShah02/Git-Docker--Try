@@ -1,4 +1,4 @@
-substituions:
+substitutions:
   CLOUDSDK_COMPUTE_REGION :  us-central1
   CLOUDSDK_COMPUTE_ZONE: us-central1-c
   CLOUDSDK_CONTAINER_CLUSTER: cluster-1
