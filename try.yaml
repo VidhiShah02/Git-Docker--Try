@@ -16,4 +16,29 @@ spec:
       - name: python-flask-app
         image: IMAGE_VALUE
         ports:
-        - containerPort: 80
+        - containerPort: 9595
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: python-flask-app
+spec:
+  tls:
+  - hosts:
+    - sdv.com
+    secretName: sdv-tls
+  rules:
+  - host: sdv.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: python-flask-service
+            port:
+              number: 9595
+        path: /
+        pathType: ImplementationSpecific
+
+
