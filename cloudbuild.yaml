@@ -20,6 +20,6 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
 
 images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
-options:
-  logging: CLOUD_LOGGING_ONLY
+#options:
+  #logging: CLOUD_LOGGING_ONLY
 
