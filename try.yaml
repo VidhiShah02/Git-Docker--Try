@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: 
+      app: python-flask-app
   template:
     metadata:
       labels:
-        app: 
+        app:  python-flask-app
     spec:
       containers:
-      - name: 
+      - name: python-flask-app
         image: 
         ports:
         - containerPort: 80

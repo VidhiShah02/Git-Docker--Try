@@ -1,28 +1,30 @@
 steps:
-steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build','-t','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA','.']
 
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
-#step 3
+
+- name: 'ubuntu'
+  args: ['bash','-c','sed -i "s,image,gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA," $_CONFIGURATION_FILE']
+
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', '$__CONFIGURATION_FILE']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster1'
 #step 4
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: [
-   'set', 
-   'image', 
-   'deployment', 
-   $_PROJECT', 
-   '$_PROJECT=gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA'
-  ]
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE= us-central1-c'
-  - 'CLOUDSDK_CONTAINER_CLUSTER= cluster1'
+#- name: 'gcr.io/cloud-builders/kubectl'
+#  args: [
+ #  'set', 
+  # 'image', 
+   #'deployment', 
+   #$_PROJECT', 
+   #'$_PROJECT=gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA'
+  #]
+  #env:
+  #- 'CLOUDSDK_COMPUTE_ZONE= us-central1-c'
+ # - 'CLOUDSDK_CONTAINER_CLUSTER= cluster1'
 # push images to Google Container Registry with tags
 images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
 
