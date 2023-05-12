@@ -30,7 +30,7 @@ spec:
           requests:
             memory: 50Mi
             cpu: 200m
-            limits:
+          limits:
             memory: 100Mi
             cpu: 500m
 
