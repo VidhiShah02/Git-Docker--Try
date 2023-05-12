@@ -1,22 +1,56 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment
+  name: python-flask-deployment
+  labels:
+    app: python-flask
 spec:
   replicas: 1
   selector:
-    matchLabels:
-      app: python-flask-app
+     matchLabels:
+       app: python-flask
   template:
     metadata:
       labels:
-        app:  python-flask-app
+        app: python-flask
     spec:
       containers:
-      - name: python-flask-app
-        image: IMAGE_VALUE
+      - name: python-flask
+        image: IMAGE_NAME:IMAGE_TAG
         ports:
-        - containerPort: 9595
+        - containerPort : 9595
+        env:
+        - name: REDIS_HOST
+          value: redis
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_DB
+          value: "0"
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 200m
+            limits:
+            memory: 100Mi
+            cpu: 500m
+
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-flask-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 9595
+    targetPort: 9595
+  selector:
+    app: python-flask
+
 
 ---
 
@@ -30,7 +64,6 @@ spec:
     - sdv.com
     secretName: sdv-tls
   rules:
-  - host: sdv.com
     http:
       paths:
       - backend:
@@ -41,4 +74,75 @@ spec:
         path: /
         pathType: ImplementationSpecific
 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pv-claim
+  labels:
+    app: redis
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis:latest
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - name: redis-persistent-storage
+          mountPath: /data
+      volumes:
+      - name: redis-persistent-storage
+        persistentVolumeClaim:
+          claimName: redis-pv-claim
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-l
+spec:
+ type: LoadBalancer
+ selector:
+   app: redis
+ ports:
+ - port: 6379
+   targetPort: 6379
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379

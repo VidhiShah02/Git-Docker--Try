@@ -5,5 +5,17 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push','gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
 
-#images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
+- name: 'ubuntu'
+  args: ['bash','-c','sed -i"s,IMAGE_VALUE,gcr.io/$PROJECT_ID/$_PROJECT," $_CONFIGURATION_FILE']
+
+- name: 'ubuntu'
+  args: ['bash','-c','sed -i "s,IMAGE_TAG,$SHORT_SHA," $_CONFIGURATION_FILE']
+  
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply','-f','$_CONFIGURATION_FILE']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster1'
+
+images: ['gcr.io/$PROJECT_ID/$_PROJECT:$SHORT_SHA']
 
