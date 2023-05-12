@@ -12,6 +12,14 @@ app = Flask(__name__)
 def index():
     #print('Try')
     return render_template('./app.html')
+ 
+redis.set('mykey', 'Hello from Python!')
+value = redis.get('mykey')
+print(value)
+
+redis.zadd('vehicles', {'car' : 0})
+redis.zadd('vehicles', {'bike' : 0})
+vehicles = redis.zrange('vehicles', 0, -1)
     # return jsonify({'data': "shubham"})
   
   
