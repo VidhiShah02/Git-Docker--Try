@@ -5,21 +5,22 @@ import socket
 
 
 
-redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+redis = Redis(host="redis", db=0)
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     #print('Try')
+    redis.set('mykey', 'Hello from Python!')
     return render_template('./app.html')
  
-redis.set('mykey', 'Hello from Python!')
-value = redis.get('mykey')
-print(value)
 
-redis.zadd('vehicles', {'car' : 0})
-redis.zadd('vehicles', {'bike' : 0})
-vehicles = redis.zrange('vehicles', 0, -1)
+#value = redis.get('mykey')
+#print(value)
+
+#redis.zadd('vehicles', {'car' : 0})
+#redis.zadd('vehicles', {'bike' : 0})
+#vehicles = redis.zrange('vehicles', 0, -1)
     # return jsonify({'data': "shubham"})
   
   
