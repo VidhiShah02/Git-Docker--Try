@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python-flask
-        image: IMAGE_NAME:IMAGE_TAG
+        image: IMAGE_VALUE:IMAGE_TAG
         ports:
         - containerPort : 9595
         env:
