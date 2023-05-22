@@ -5,7 +5,7 @@ import socket
 
 
 
-redis = Redis(host='10.16.12.93',port=6379, db=0)
+redis = Redis(host='redis-master',port=6379, db=0)
 app = Flask(__name__)
 #redis.set('mykey', 'Hello from Python!')
 @app.route('/')
