@@ -25,7 +25,7 @@ spec:
         - name: REDIS_DB
           value: "0"
         - name: REDIS_PASSWORD
-          value: "SUZRNUw3YUFDbw=="
+          value: SUZRNUw3YUFDbw==
         ports:
         - containerPort : 9595
         resources:
