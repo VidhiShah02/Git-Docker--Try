@@ -17,6 +17,15 @@ spec:
       containers:
       - name: python-flask
         image: IMAGE_VALUE:IMAGE_TAG
+        env:
+        - name: REDIS_HOST
+          value: redis-replicas
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_DB
+          value: "0"
+        - name: REDIS_PASSWORD
+          value: "SUZRNUw3YUFDbw=="
         ports:
         - containerPort : 9595
         resources:
