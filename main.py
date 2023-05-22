@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from redis import Redis, RedisError
+#from redis import Redis, RedisError
 import os 
 import socket
 
