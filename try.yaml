@@ -19,7 +19,7 @@ spec:
         image: IMAGE_VALUE:IMAGE_TAG
         env:
         - name: REDIS_HOST
-          value: "redis-replicas"
+          value: "redis-master"
         - name: REDIS_PORT
           value: "6379"
         - name: REDIS_DB
